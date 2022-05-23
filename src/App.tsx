@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import GlobalStyle from "./styles/global";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import reducer, { initialState } from "./store/reducer";
+import SignIn from "../src/pages/Signin";
+import SignUp from "../src/pages/Signup";
+import Dashboard from "../src/pages/Dashboard";
+import Contracts from "../src/pages/Contracts";
+import Companys from "../src/pages/Companys";
 
-function App() {
+const store = createStore(reducer, initialState);
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <GlobalStyle />
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="contracts" element={<Contracts />} />
+          <Route path="companys" element={<Companys />} />
+        </Routes>
+      </Provider>
+    </BrowserRouter>
   );
 }
-
-export default App;
